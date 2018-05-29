@@ -362,7 +362,12 @@ export default class {
                             } else if (props[key].value === props[key].key) {
                                 val = index;
                             } else {
-                                val = $parent[props[key].value];
+                                val = binddata[index]
+                                var _wggPath = props[key].value.split('.')
+                                for (var _wggI = 1; val && _wggI < _wggPath.length; ++_wggI) {
+                                    val = val[_wggPath[_wggI]]
+                                }
+                                val = val || $parent[props[key].value];
                             }
                             this.$index = index;
                             this.data[key] = val;
